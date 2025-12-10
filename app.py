@@ -3,7 +3,7 @@ import asyncio
 import io
 import csv
 from urllib.parse import urlparse
-import email_theifer # Your modified script
+import email_thiefer # Your modified script
 
 app = Flask(__name__)
 app.secret_key = 'super_secret_key_for_session' # Replace with a strong, unique key in production
@@ -23,9 +23,9 @@ def index():
     """Renders the main input form."""
     return render_template('index.html')
 
-@app.route('/theif', methods=['POST'])
-async def theif():
-    """Handles the URL submission, runs the email_theifer, and displays results."""
+@app.route('/thief', methods=['POST'])
+async def thief():
+    """Handles the URL submission, runs the email_thiefer, and displays results."""
     target_url = request.form.get('url')
     
     if not target_url:
@@ -37,8 +37,8 @@ async def theif():
     emails = []
     error_message = None
     try:
-        # Run the email_theifer. This is where the long-running task might hit timeouts.
-        emails = await email_theifer.run_email_theifer(target_url)
+        # Run the email_thiefer. This is where the long-running task might hit timeouts.
+        emails = await email_thiefer.run_email_thiefer(target_url)
         session['found_emails'] = emails # Store emails in session for download
     except asyncio.TimeoutError:
         error_message = "Crawl timed out. The website might be too large or slow. Try a smaller scope."
